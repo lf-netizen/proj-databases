@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  reccomend:
+    build:  
+      context: .  
+      dockerfile: Dockerfile  
+    ports:
+      - "8008:8008"
+    networks:
+      - databases_external_db_api
+
+networks:
+  databases_external_db_api:
+    external: true

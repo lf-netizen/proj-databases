@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  change_order_status:
+    build:  # Add the build configuration
+      context: .  # Use the current directory as the build context
+      dockerfile: Dockerfile  # Specify the Dockerfile to use
+    ports:
+      - "8004:8004"
+    networks:
+      - databases_external_db_api
+
+networks:
+  databases_external_db_api:
+    external: true

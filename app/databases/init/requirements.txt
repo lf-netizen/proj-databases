@@ -1,0 +1,7 @@
+requests
+qdrant_client
+nanoid
+numpy
+pydantic
+pandas
+pillow

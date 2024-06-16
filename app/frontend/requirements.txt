@@ -1,0 +1,10 @@
+streamlit>=1.31.0
+requests
+aiohttp
+pydantic
+nanoid
+openai
+pillow
+python-io
+fastapi
+sqlmodel

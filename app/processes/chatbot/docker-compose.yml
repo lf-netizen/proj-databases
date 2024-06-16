@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  chatbot:
+    build:  
+      context: .  
+      dockerfile: Dockerfile  
+    ports:
+      - "8009:8009"
+    networks:
+      - databases_external_db_api
+    env_file:
+      - .env
+
+networks:
+  databases_external_db_api:
+    external: true

@@ -1,0 +1,17 @@
+  version: '3.8'
+
+  services:
+    send_order:
+      build:  # Add the build configuration
+        context: .  # Use the current directory as the build context
+        dockerfile: Dockerfile  # Specify the Dockerfile to use
+      ports:
+        - "8006:8006"
+      volumes:
+        - .:/send_order
+      networks:
+        - databases_external_db_api
+
+  networks:
+    databases_external_db_api:
+      external: true

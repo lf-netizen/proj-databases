@@ -1,0 +1,74 @@
+version: '3.9'
+
+services:
+  api:
+    build:
+      context: api
+    env_file:
+      - api/.env
+    volumes:
+      - ./init:/init
+    ports:
+      - "8000:8000"
+    depends_on:
+      - postgres
+      - mongodb
+      - qdrant
+    networks:
+      - internal_network
+      - external_db_api
+
+  startup:
+    build:
+      context: init
+    depends_on:
+      - postgres
+      - mongodb
+      - qdrant
+      - api
+    networks:
+      - internal_network
+
+
+  postgres:
+    image: postgres
+    env_file:
+      - postgres/.env
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - internal_network
+
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - internal_network
+  qdrant:
+    image: qdrant/qdrant
+    container_name: qdrant
+    volumes:
+      - ./qdrant/qdrant_data:/qdrant/storage
+      - ./qdrant/qdrant_snapshots/:/snapshots
+      - ./qdrant/init/:/qdrant/init
+    environment:
+      QDRANT__STORAGE__SNAPSHOT_PATH: /snapshots
+      QDRANT__TELEMETRY_DISABLED: 'true'
+    ports:
+      - "6333:6333"
+    networks:
+      - internal_network
+volumes:
+  postgres_data:
+  mongodb_data:
+
+networks:
+  internal_network:
+    driver: bridge
+  external_db_api:
+    driver: bridge

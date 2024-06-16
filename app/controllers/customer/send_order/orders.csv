@@ -1,0 +1,2 @@
+username,first_name,last_name,address,city,postal_code,email,payment_method,order_summary
+sample_user,asd,asda,sdad,asd,asd,asd@wp.pl,Karta kredytowa,"[{'nazwa': 'Produkt 1', 'cena': '$23.42', 'ilość': 7, 'Łączna cena': '$163.94'}, {'nazwa': 'Produkt 3', 'cena': '$12.99', 'ilość': 6, 'Łączna cena': '$77.94'}]"
